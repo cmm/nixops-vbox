@@ -152,6 +152,8 @@ class VirtualBoxState(MachineState[VirtualBoxDefinition]):
             )
         vminfo = {}
         for line in lines:
+            if line.startswith(" "):
+                continue
             (k, v) = line.split("=", 1)
             vminfo[k] = v if not len(v) or v[0] != '"' else v[1:-1]
         return vminfo
